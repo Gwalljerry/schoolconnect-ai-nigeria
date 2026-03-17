@@ -1,100 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Quiz - SchoolConnect AI Nigeria</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-body{
-font-family: Arial;
-background:#f2f2f2;
-text-align:center;
-padding:20px;
-}
-
-.question{
-font-size:20px;
-margin-bottom:20px;
-}
-
-button{
-padding:10px 20px;
-margin:10px;
-cursor:pointer;
-}
-
-#result{
-font-size:22px;
-margin-top:20px;
-color:green;
-}
-</style>
-
+<title>Quiz</title>
 </head>
 
-<body>
+<body style="text-align:center; font-family:Arial;">
 
-<h2>English Quiz</h2>
+<h2>Simple Quiz</h2>
 
-<div class="question" id="question">Loading...</div>
+<p>What is 2 + 2?</p>
 
-<div id="answers"></div>
+<button onclick="check(4)">4</button>
+<button onclick="check(5)">5</button>
 
-<div id="result"></div>
+<p id="result"></p>
 
 <script>
-
-let questions = [
-{
-q: "Choose the correct spelling:",
-options: ["Recieve", "Receive", "Receeve"],
-answer: "Receive"
-},
-{
-q: "Synonym of 'Happy':",
-options: ["Sad", "Joyful", "Angry"],
-answer: "Joyful"
-},
-{
-q: "Opposite of 'Big':",
-options: ["Large", "Huge", "Small"],
-answer: "Small"
-}
-];
-
-let current = 0;
-let score = 0;
-
-function loadQuestion(){
-let q = questions[current];
-document.getElementById("question").innerText = q.q;
-
-let answersHTML = "";
-q.options.forEach(option => {
-answersHTML += `<button onclick="checkAnswer('${option}')">${option}</button>`;
-});
-
-document.getElementById("answers").innerHTML = answersHTML;
-}
-
-function checkAnswer(selected){
-if(selected === questions[current].answer){
-score++;
-}
-
-current++;
-
-if(current < questions.length){
-loadQuestion();
+function check(answer){
+if(answer === 4){
+document.getElementById("result").innerText = "Correct!";
 }else{
-document.getElementById("question").innerText = "Quiz Completed!";
-document.getElementById("answers").innerHTML = "";
-document.getElementById("result").innerText = "Your Score: " + score + "/" + questions.length;
+document.getElementById("result").innerText = "Wrong!";
 }
 }
-
-loadQuestion();
-
 </script>
 
 </body>
