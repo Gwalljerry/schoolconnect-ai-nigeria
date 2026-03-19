@@ -23,35 +23,82 @@ table{margin:auto;}
 <input type="number" id="eng2" placeholder="2nd CA">
 <input type="number" id="engexam" placeholder="Exam"><br>
 
-<h3>Mathematics</h3>
-<input type="number" id="math1" placeholder="1st CA">
-<input type="number" id="math2" placeholder="2nd CA">
-<input type="number" id="mathexam" placeholder="Exam"><br>
-
-<button onclick="save()">Save Result</button>
-
 <script>
-function save(){
 
-let data = {
-school: document.getElementById("school").value,
-logo: document.getElementById("logo").value,
-student: document.getElementById("student").value,
-class: document.getElementById("class").value,
-term: document.getElementById("term").value,
+function checkResult(){
 
-english: calc("eng1","eng2","engexam"),
-math: calc("math1","math2","mathexam")
-};
-school: document.getElementById("school").value,
-student: document.getElementById("student").value,
-class: document.getElementById("class").value,
-term: document.getElementById("term").value,
+let name = document.getElementById("studentName").value;
 
-english: calc("eng1","eng2","engexam"),
-math: calc("math1","math2","mathexam")
-};
+let data = localStorage.getItem(name);
 
+if(!data){
+alert("No result found");
+return;
+}
+
+let r = JSON.parse(data);
+
+// CALCULATIONS
+let total = r.english.total + r.math.total;
+let average = total / 2;
+
+let remark = average >= 70 ? "Excellent" :
+average >= 60 ? "Good" :
+average >= 50 ? "Fair" : "Fail";
+
+let html = `
+<div style="border:2px solid black; padding:20px; width:80%; margin:auto; background:white;">
+
+<img src="${r.logo}" width="80"><br>
+
+<h2>${r.school}</h2>
+<h3>Student Report Card</h3>
+
+<p><b>Name:</b> ${r.student}</p>
+<p><b>Class:</b> ${r.class}</p>
+<p><b>Term:</b> ${r.term}</p>
+
+<table border="1" style="width:100%; text-align:center;">
+<tr>
+<th>Subject</th><th>CA1</th><th>CA2</th><th>Exam</th><th>Total</th><th>Grade</th>
+</tr>
+
+<tr>
+<td>English</td>
+<td>${r.english.ca1}</td>
+<td>${r.english.ca2}</td>
+<td>${r.english.exam}</td>
+<td>${r.english.total}</td>
+<td>${r.english.grade}</td>
+</tr>
+
+<tr>
+<td>Mathematics</td>
+<td>${r.math.ca1}</td>
+<td>${r.math.ca2}</td>
+<td>${r.math.exam}</td>
+<td>${r.math.total}</td>
+<td>${r.math.grade}</td>
+</tr>
+
+</table>
+
+<br>
+
+<h3>Total: ${total}</h3>
+<h3>Average: ${average.toFixed(2)}</h3>
+<h3>Remark: ${remark}</h3>
+
+<br>
+<button onclick="window.print()">Print Result</button>
+
+</div>
+`;
+
+document.getElementById("resultArea").innerHTML = html;
+
+}
+</script>
 localStorage.setItem(data.student, JSON.stringify(data));
 
 alert("Saved!");
@@ -69,7 +116,11 @@ exam: document.getElementById(c).value,
 total: total,
 grade: total >= 70 ? "A" : total >=60 ? "B" : total >=50 ? "C" : "F"
 };
-}
+}english: calc("eng1","eng2","engexam"),
+math: calc("math1","math2","mathexam"),
+biology: calc("bio1","bio2","bioexam"),
+chemistry: calc("chem1","chem2","chemexam"),
+physics: calc("phy1","phy2","phyexam")
 </script>
 
 </body>
