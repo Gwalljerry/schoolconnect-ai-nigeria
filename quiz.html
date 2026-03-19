@@ -18,8 +18,10 @@
 <script>
 function check(answer){
 if(answer === 4){
-document.getElementById("result").innerText = "Correct!";
-}else{
+localStorage.setItem("score", score);
+document.getElementById("result").innerHTML = 
+"Your Score: " + score + "/" + questions.length +
+"<br><br><a href='dashboard.html'><button>Go to Dashboard</button></a>";
 document.getElementById("result").innerText = "Wrong!";
 }
 }
