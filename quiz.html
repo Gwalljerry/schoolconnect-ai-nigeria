@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Quiz</title>
+<title>English Quiz</title>
 </head>
 
 <body style="text-align:center; font-family:Arial; background:#f5f7fa;">
 
-<h2>Select Language / Zaɓi Harshe</h2>
-
-<button onclick="startQuiz('eng')">English</button>
-<button onclick="startQuiz('hausa')">Hausa</button>
+<h2>English CBT Quiz</h2>
 
 <h3 id="timer" style="color:red;"></h3>
 
@@ -17,36 +14,36 @@
 
 <script>
 
-let lang = "eng";
 let current = 0;
 let score = 0;
-let time = 30;
+let time = 60;
 let timerInterval;
 
 let questions = [
 {
-engQ: "What is 2 + 2?",
-hausaQ: "Nawa ne 2 + 2?",
-options: ["3","4","5"],
-answer: "4",
-engExp: "2 + 2 equals 4.",
-hausaExp: "2 + 2 dai dai 4 ne."
+q: "Choose the correct spelling:",
+options: ["Recieve","Receive","Receeve"],
+answer: "Receive",
+exp: "Receive is the correct spelling."
 },
 {
-engQ: "Synonym of Happy?",
-hausaQ: "Ma'anar Happy?",
+q: "Synonym of Happy:",
 options: ["Sad","Joyful","Angry"],
 answer: "Joyful",
-engExp: "Happy means joyful.",
-hausaExp: "Happy yana nufin farin ciki."
+exp: "Happy means joyful or glad."
+},
+{
+q: "Opposite of Big:",
+options: ["Large","Huge","Small"],
+answer: "Small",
+exp: "Small is the opposite of big."
 }
 ];
 
-function startQuiz(selectedLang){
-lang = selectedLang;
+function startQuiz(){
 current = 0;
 score = 0;
-time = 30;
+time = 60;
 startTimer();
 loadQuestion();
 }
@@ -66,9 +63,7 @@ endQuiz();
 function loadQuestion(){
 let q = questions[current];
 
-let questionText = (lang === "eng") ? q.engQ : q.hausaQ;
-
-let html = "<h3>" + questionText + "</h3>";
+let html = "<h3>" + q.q + "</h3>";
 
 q.options.forEach(function(opt){
 html += "<button onclick=\"checkAnswer('" + opt + "')\">" + opt + "</button><br><br>";
@@ -79,7 +74,6 @@ document.getElementById("quizArea").innerHTML = html;
 
 function checkAnswer(selected){
 let q = questions[current];
-let explanation = (lang === "eng") ? q.engExp : q.hausaExp;
 
 if(selected === q.answer){
 score++;
@@ -87,7 +81,7 @@ score++;
 
 document.getElementById("quizArea").innerHTML =
 "<h3>" + (selected === q.answer ? "Correct!" : "Wrong!") + "</h3>" +
-"<p>" + explanation + "</p>" +
+"<p>" + q.exp + "</p>" +
 "<button onclick='nextQuestion()'>Next</button>";
 }
 
@@ -111,6 +105,8 @@ document.getElementById("quizArea").innerHTML =
 "<p>" + (score >= 2 ? "Good performance!" : "You need improvement.") + "</p>" +
 "<a href='dashboard.html'><button>Go to Dashboard</button></a>";
 }
+
+startQuiz();
 
 </script>
 
