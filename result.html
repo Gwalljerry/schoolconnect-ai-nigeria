@@ -13,17 +13,27 @@ return;
 
 let r = JSON.parse(data);
 
+// CALCULATIONS
+let total = r.english.total + r.math.total;
+let average = total / 2;
+
+let remark = average >= 70 ? "Excellent" :
+average >= 60 ? "Good" :
+average >= 50 ? "Fair" : "Fail";
+
 let html = `
-<div style="border:1px solid black; padding:20px">
+<div style="border:2px solid black; padding:20px; width:80%; margin:auto; background:white;">
+
+<img src="${r.logo}" width="80"><br>
 
 <h2>${r.school}</h2>
-<h3>Report Card</h3>
+<h3>Student Report Card</h3>
 
-<p>Name: ${r.student}</p>
-<p>Class: ${r.class}</p>
-<p>Term: ${r.term}</p>
+<p><b>Name:</b> ${r.student}</p>
+<p><b>Class:</b> ${r.class}</p>
+<p><b>Term:</b> ${r.term}</p>
 
-<table border="1" style="margin:auto;">
+<table border="1" style="width:100%; text-align:center;">
 <tr>
 <th>Subject</th><th>CA1</th><th>CA2</th><th>Exam</th><th>Total</th><th>Grade</th>
 </tr>
@@ -49,7 +59,13 @@ let html = `
 </table>
 
 <br>
-<button onclick="window.print()">Print</button>
+
+<h3>Total: ${total}</h3>
+<h3>Average: ${average.toFixed(2)}</h3>
+<h3>Remark: ${remark}</h3>
+
+<br>
+<button onclick="window.print()">Print Result</button>
 
 </div>
 `;
