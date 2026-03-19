@@ -52,7 +52,14 @@ box-shadow:0 0 10px rgba(0,0,0,0.1);
 <p id="msg"></p>
 
 <script>
+let teacher = prompt("Enter your name");
 
+let approved = localStorage.getItem("teacher_" + teacher);
+
+if(approved !== "approved"){
+alert("Access Denied! You are not approved.");
+return;
+}
 function saveResult(){
 
 let name = document.getElementById("studentName").value;
