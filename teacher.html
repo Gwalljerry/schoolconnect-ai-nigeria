@@ -14,10 +14,10 @@ table{margin:auto;}
 <h2>Upload Student Result</h2>
 
 <input type="text" id="school" placeholder="School Name"><br>
+  <input type="text" id="logo" placeholder="Paste School Logo URL"><br>
 <input type="text" id="student" placeholder="Student Full Name"><br>
 <input type="text" id="class" placeholder="Class (JSS1, SS2 etc)"><br>
 <input type="text" id="term" placeholder="Term (1st, 2nd, 3rd)"><br>
-
 <h3>English</h3>
 <input type="number" id="eng1" placeholder="1st CA">
 <input type="number" id="eng2" placeholder="2nd CA">
@@ -34,6 +34,15 @@ table{margin:auto;}
 function save(){
 
 let data = {
+school: document.getElementById("school").value,
+logo: document.getElementById("logo").value,
+student: document.getElementById("student").value,
+class: document.getElementById("class").value,
+term: document.getElementById("term").value,
+
+english: calc("eng1","eng2","engexam"),
+math: calc("math1","math2","mathexam")
+};
 school: document.getElementById("school").value,
 student: document.getElementById("student").value,
 class: document.getElementById("class").value,
