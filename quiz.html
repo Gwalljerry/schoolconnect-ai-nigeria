@@ -6,32 +6,57 @@
 
 <body style="text-align:center; font-family:Arial; background:#f5f7fa;">
 
-<h2 style="font-size:28px;">Simple Quiz</h2>
+<h2>Select Language / Zaɓi Harshe</h2>
 
-<p style="font-size:24px;">What is 2 + 2?</p>
+<button onclick="setLang('eng')">English</button>
+<button onclick="setLang('hausa')">Hausa</button>
 
-<button onclick="checkAnswer(4)" style="font-size:20px; padding:10px 20px;">4</button>
-<button onclick="checkAnswer(5)" style="font-size:20px; padding:10px 20px;">5</button>
-
-<p id="result" style="font-size:22px; margin-top:20px;"></p>
-
-<p>What is 2 + 2?</p>
-
-<button onclick="checkAnswer(4)">4</button>
-<button onclick="checkAnswer(5)">5</button>
-
-<p id="result"></p>
+<div id="quizArea"></div>
 
 <script>
-function checkAnswer(answer){
-if(answer === 4){
-document.getElementById("result").innerText = "Correct!";
-localStorage.setItem("score", 1);
+
+let lang = "eng";
+
+function setLang(selected){
+lang = selected;
+loadQuestion();
+}
+
+function loadQuestion(){
+let question = "";
+let correct = 4;
+
+if(lang === "eng"){
+question = "What is 2 + 2?";
 }else{
-document.getElementById("result").innerText = "Wrong!";
+question = "Nawa ne 2 + 2?";
+}
+
+let html = `
+<h3 style="font-size:24px;">${question}</h3>
+<button onclick="check(4)">4</button>
+<button onclick="check(5)">5</button>
+`;
+
+document.getElementById("quizArea").innerHTML = html;
+}
+
+function check(ans){
+let message = "";
+
+if(ans === 4){
+localStorage.setItem("score", 1);
+message = (lang === "eng") ? "Correct!" : "Dai dai ne!";
+}else{
 localStorage.setItem("score", 0);
+message = (lang === "eng") ? "Wrong!" : "Ba dai ba!";
 }
+
+document.getElementById("quizArea").innerHTML =
+`<h3>${message}</h3><br>
+<a href="dashboard.html"><button>Go to Dashboard</button></a>`;
 }
+
 </script>
 
 </body>
