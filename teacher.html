@@ -1,92 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Teacher Upload</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
+<title>Teacher Result Upload</title>
 <style>
-body{
-font-family: Arial;
-background:#f5f7fa;
-text-align:center;
-}
-
-input{
-padding:10px;
-margin:8px;
-width:250px;
-}
-
-button{
-padding:10px 20px;
-background:#004aad;
-color:white;
-border:none;
-cursor:pointer;
-}
-
-.card{
-background:white;
-padding:20px;
-margin:20px;
-display:inline-block;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
-}
+body{font-family:Arial; text-align:center;}
+input{padding:8px; margin:5px;}
+table{margin:auto;}
 </style>
 </head>
 
 <body>
 
-<h2>Teacher Result Upload</h2>
+<h2>Upload Student Result</h2>
 
-<input type="text" id="studentName" placeholder="Student Name"><br>
-<input type="text" id="studentID" placeholder="Student ID"><br>
+<input type="text" id="school" placeholder="School Name"><br>
+<input type="text" id="student" placeholder="Student Full Name"><br>
+<input type="text" id="class" placeholder="Class (JSS1, SS2 etc)"><br>
+<input type="text" id="term" placeholder="Term (1st, 2nd, 3rd)"><br>
 
-<input type="number" id="english" placeholder="English Score"><br>
-<input type="number" id="math" placeholder="Math Score"><br>
-<input type="number" id="biology" placeholder="Biology Score"><br>
+<h3>English</h3>
+<input type="number" id="eng1" placeholder="1st CA">
+<input type="number" id="eng2" placeholder="2nd CA">
+<input type="number" id="engexam" placeholder="Exam"><br>
 
-<button onclick="saveResult()">Save Result</button>
+<h3>Mathematics</h3>
+<input type="number" id="math1" placeholder="1st CA">
+<input type="number" id="math2" placeholder="2nd CA">
+<input type="number" id="mathexam" placeholder="Exam"><br>
 
-<p id="msg"></p>
+<button onclick="save()">Save Result</button>
 
 <script>
-let teacher = prompt("Enter your name");
+function save(){
 
-let approved = localStorage.getItem("teacher_" + teacher);
+let data = {
+school: document.getElementById("school").value,
+student: document.getElementById("student").value,
+class: document.getElementById("class").value,
+term: document.getElementById("term").value,
 
-if(approved !== "approved"){
-alert("Access Denied! You are not approved.");
-return;
-}
-function saveResult(){
-
-let name = document.getElementById("studentName").value;
-let id = document.getElementById("studentID").value;
-let eng = document.getElementById("english").value;
-let math = document.getElementById("math").value;
-let bio = document.getElementById("biology").value;
-
-if(name=="" || id=="" || eng=="" || math=="" || bio==""){
-alert("Fill all fields");
-return;
-}
-
-// Save to localStorage (temporary database)
-let result = {
-name: name,
-id: id,
-english: eng,
-math: math,
-biology: bio
+english: calc("eng1","eng2","engexam"),
+math: calc("math1","math2","mathexam")
 };
 
-localStorage.setItem(id, JSON.stringify(result));
+localStorage.setItem(data.student, JSON.stringify(data));
 
-document.getElementById("msg").innerText = "Result Saved Successfully!";
+alert("Saved!");
 }
 
+function calc(a,b,c){
+let total = Number(document.getElementById(a).value) +
+Number(document.getElementById(b).value) +
+Number(document.getElementById(c).value);
+
+return {
+ca1: document.getElementById(a).value,
+ca2: document.getElementById(b).value,
+exam: document.getElementById(c).value,
+total: total,
+grade: total >= 70 ? "A" : total >=60 ? "B" : total >=50 ? "C" : "F"
+};
+}
 </script>
 
 </body>
