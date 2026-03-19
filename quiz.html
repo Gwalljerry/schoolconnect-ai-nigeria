@@ -10,10 +10,23 @@
 
 <button onclick="startQuiz('eng')">English</button>
 <button onclick="startQuiz('hausa')">Hausa</button>
-
+<h3 id="timer" style="color:red;"></h3>
 <div id="quizArea"></div>
 
-<script>
+<let time = 30;
+let timerInterval;
+
+function startTimer(){
+timerInterval = setInterval(()=>{
+document.getElementById("timer").innerText = "Time left: " + time + "s";
+time--;
+
+if(time < 0){
+clearInterval(timerInterval);
+endQuiz();
+}
+},1000);
+}>
 
 let lang = "eng";
 let current = 0;
@@ -42,6 +55,8 @@ function startQuiz(selectedLang){
 lang = selectedLang;
 current = 0;
 score = 0;
+time = 30;
+startTimer();
 loadQuestion();
 }
 
@@ -85,13 +100,20 @@ loadQuestion();
 localStorage.setItem("score", score);
 
 document.getElementById("quizArea").innerHTML =
-`<h3>Final Score: ${score}/${questions.length}</h3>
-<br>
+<h3>Final Score: ${score}/${questions.length}</h3>
+<p>${score >= 2 ? "Good performance!" : "You need improvement."}</p>
 <a href="dashboard.html"><button>Go to Dashboard</button></a>`;
 }
 }
 
-</script>
+</function endQuiz(){
+localStorage.setItem("score", score);
+
+document.getElementById("quizArea").innerHTML =
+`<h3>Time Up!</h3>
+<p>Your Score: ${score}/${questions.length}</p>
+<a href="dashboard.html"><button>Go to Dashboard</button></a>`;
+}>
 
 </body>
 </html>
