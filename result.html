@@ -67,8 +67,31 @@ alert("Please enter all details");
 return;
 }
 
-// Sample result (we will upgrade later)
+let data = localStorage.getItem(id);
+
+if(!data){
+alert("No result found!");
+return;
+}
+
+let result = JSON.parse(data);
+
+let total = Number(result.english) + Number(result.math) + Number(result.biology);
+
 let html = `
+<div class="card">
+<h3>${result.name}</h3>
+<p>ID: ${result.id}</p>
+<p>English: ${result.english}</p>
+<p>Mathematics: ${result.math}</p>
+<p>Biology: ${result.biology}</p>
+<h4>Total: ${total}</h4>
+<p>Grade: ${total >= 200 ? "A" : total >=150 ? "B" : "C"}</p>
+<button onclick="window.print()">Print Result</button>
+</div>
+`;
+
+document.getElementById("resultArea").innerHTML = html;
 <div class="card">
 <h3>${name}</h3>
 <p>ID: ${id}</p>
