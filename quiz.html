@@ -10,27 +10,18 @@
 
 <button onclick="startQuiz('eng')">English</button>
 <button onclick="startQuiz('hausa')">Hausa</button>
+
 <h3 id="timer" style="color:red;"></h3>
+
 <div id="quizArea"></div>
 
-<let time = 30;
-let timerInterval;
-
-function startTimer(){
-timerInterval = setInterval(()=>{
-document.getElementById("timer").innerText = "Time left: " + time + "s";
-time--;
-
-if(time < 0){
-clearInterval(timerInterval);
-endQuiz();
-}
-},1000);
-}>
+<script>
 
 let lang = "eng";
 let current = 0;
 let score = 0;
+let time = 30;
+let timerInterval;
 
 let questions = [
 {
@@ -46,7 +37,7 @@ engQ: "Synonym of Happy?",
 hausaQ: "Ma'anar Happy?",
 options: ["Sad","Joyful","Angry"],
 answer: "Joyful",
-engExp: "Happy means joyful or glad.",
+engExp: "Happy means joyful.",
 hausaExp: "Happy yana nufin farin ciki."
 }
 ];
@@ -60,15 +51,27 @@ startTimer();
 loadQuestion();
 }
 
+function startTimer(){
+timerInterval = setInterval(function(){
+document.getElementById("timer").innerText = "Time left: " + time + "s";
+time--;
+
+if(time < 0){
+clearInterval(timerInterval);
+endQuiz();
+}
+},1000);
+}
+
 function loadQuestion(){
 let q = questions[current];
 
 let questionText = (lang === "eng") ? q.engQ : q.hausaQ;
 
-let html = `<h3 style="font-size:24px;">${questionText}</h3>`;
+let html = "<h3>" + questionText + "</h3>";
 
-q.options.forEach(opt=>{
-html += `<button onclick="checkAnswer('${opt}')">${opt}</button><br><br>`;
+q.options.forEach(function(opt){
+html += "<button onclick=\"checkAnswer('" + opt + "')\">" + opt + "</button><br><br>";
 });
 
 document.getElementById("quizArea").innerHTML = html;
@@ -76,19 +79,16 @@ document.getElementById("quizArea").innerHTML = html;
 
 function checkAnswer(selected){
 let q = questions[current];
-
-let correct = q.answer;
 let explanation = (lang === "eng") ? q.engExp : q.hausaExp;
 
-if(selected === correct){
+if(selected === q.answer){
 score++;
 }
 
 document.getElementById("quizArea").innerHTML =
-`<h3>${selected === correct ? "Correct!" : "Wrong!"}</h3>
-<p>${explanation}</p>
-<br>
-<button onclick="nextQuestion()">Next</button>`;
+"<h3>" + (selected === q.answer ? "Correct!" : "Wrong!") + "</h3>" +
+"<p>" + explanation + "</p>" +
+"<button onclick='nextQuestion()'>Next</button>";
 }
 
 function nextQuestion(){
@@ -97,23 +97,22 @@ current++;
 if(current < questions.length){
 loadQuestion();
 }else{
-localStorage.setItem("score", score);
-
-document.getElementById("quizArea").innerHTML =
-<h3>Final Score: ${score}/${questions.length}</h3>
-<p>${score >= 2 ? "Good performance!" : "You need improvement."}</p>
-<a href="dashboard.html"><button>Go to Dashboard</button></a>`;
+endQuiz();
 }
 }
 
-</function endQuiz(){
+function endQuiz(){
+clearInterval(timerInterval);
+
 localStorage.setItem("score", score);
 
 document.getElementById("quizArea").innerHTML =
-`<h3>Time Up!</h3>
-<p>Your Score: ${score}/${questions.length}</p>
-<a href="dashboard.html"><button>Go to Dashboard</button></a>`;
-}>
+"<h3>Final Score: " + score + "/" + questions.length + "</h3>" +
+"<p>" + (score >= 2 ? "Good performance!" : "You need improvement.") + "</p>" +
+"<a href='dashboard.html'><button>Go to Dashboard</button></a>";
+}
+
+</script>
 
 </body>
 </html>
