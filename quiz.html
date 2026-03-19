@@ -10,19 +10,19 @@
 
 <p>What is 2 + 2?</p>
 
-<button onclick="check(4)">4</button>
-<button onclick="check(5)">5</button>
+<button onclick="checkAnswer(4)">4</button>
+<button onclick="checkAnswer(5)">5</button>
 
 <p id="result"></p>
 
 <script>
-function check(answer){
+function checkAnswer(answer){
 if(answer === 4){
-localStorage.setItem("score", score);
-document.getElementById("result").innerHTML = 
-"Your Score: " + score + "/" + questions.length +
-"<br><br><a href='dashboard.html'><button>Go to Dashboard</button></a>";
+document.getElementById("result").innerText = "Correct!";
+localStorage.setItem("score", 1);
+}else{
 document.getElementById("result").innerText = "Wrong!";
+localStorage.setItem("score", 0);
 }
 }
 </script>
