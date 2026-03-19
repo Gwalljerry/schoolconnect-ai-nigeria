@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>English Quiz</title>
+<title>English CBT Quiz</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+font-family: Arial;
+background:#f5f7fa;
+text-align:center;
+}
+
+button{
+padding:10px 20px;
+margin:10px;
+font-size:16px;
+cursor:pointer;
+}
+
+#timer{
+color:red;
+font-size:20px;
+}
+</style>
+
 </head>
 
-<body style="text-align:center; font-family:Arial; background:#f5f7fa;">
+<body>
 
 <h2>English CBT Quiz</h2>
 
-<h3 id="timer" style="color:red;"></h3>
+<p id="timer"></p>
 
 <div id="quizArea"></div>
 
@@ -50,7 +72,7 @@ loadQuestion();
 
 function startTimer(){
 timerInterval = setInterval(function(){
-document.getElementById("timer").innerText = "Time left: " + time + "s";
+document.getElementById("timer").innerText = "Time left: " + time + " seconds";
 time--;
 
 if(time < 0){
@@ -66,7 +88,7 @@ let q = questions[current];
 let html = "<h3>" + q.q + "</h3>";
 
 q.options.forEach(function(opt){
-html += "<button onclick=\"checkAnswer('" + opt + "')\">" + opt + "</button><br><br>";
+html += "<button onclick=\"checkAnswer('" + opt + "')\">" + opt + "</button><br>";
 });
 
 document.getElementById("quizArea").innerHTML = html;
@@ -82,7 +104,7 @@ score++;
 document.getElementById("quizArea").innerHTML =
 "<h3>" + (selected === q.answer ? "Correct!" : "Wrong!") + "</h3>" +
 "<p>" + q.exp + "</p>" +
-"<button onclick='nextQuestion()'>Next</button>";
+"<button onclick='nextQuestion()'>Next Question</button>";
 }
 
 function nextQuestion(){
