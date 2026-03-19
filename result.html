@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Check Result</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+font-family: Arial;
+background:#f5f7fa;
+text-align:center;
+}
+
+.container{
+margin-top:40px;
+}
+
+input{
+padding:10px;
+margin:10px;
+width:250px;
+}
+
+button{
+padding:10px 20px;
+background:#004aad;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+.card{
+background:white;
+padding:20px;
+margin:20px;
+display:inline-block;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Check Student Result</h2>
+
+<input type="text" id="studentName" placeholder="Enter Student Name"><br>
+<input type="text" id="studentID" placeholder="Enter Student ID"><br>
+
+<button onclick="checkResult()">Check Result</button>
+
+<div id="resultArea"></div>
+
+</div>
+
+<script>
+
+function checkResult(){
+
+let name = document.getElementById("studentName").value;
+let id = document.getElementById("studentID").value;
+
+if(name === "" || id === ""){
+alert("Please enter all details");
+return;
+}
+
+// Sample result (we will upgrade later)
+let html = `
+<div class="card">
+<h3>${name}</h3>
+<p>ID: ${id}</p>
+<p>English: 75</p>
+<p>Mathematics: 68</p>
+<p>Biology: 80</p>
+<h4>Total: 223</h4>
+<p>Grade: B</p>
+<button onclick="window.print()">Print Result</button>
+</div>
+`;
+
+document.getElementById("resultArea").innerHTML = html;
+
+}
+
+</script>
+
+</body>
+</html>
