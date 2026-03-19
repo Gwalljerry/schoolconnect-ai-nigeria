@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Teacher Upload</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+font-family: Arial;
+background:#f5f7fa;
+text-align:center;
+}
+
+input{
+padding:10px;
+margin:8px;
+width:250px;
+}
+
+button{
+padding:10px 20px;
+background:#004aad;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+.card{
+background:white;
+padding:20px;
+margin:20px;
+display:inline-block;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+</style>
+</head>
+
+<body>
+
+<h2>Teacher Result Upload</h2>
+
+<input type="text" id="studentName" placeholder="Student Name"><br>
+<input type="text" id="studentID" placeholder="Student ID"><br>
+
+<input type="number" id="english" placeholder="English Score"><br>
+<input type="number" id="math" placeholder="Math Score"><br>
+<input type="number" id="biology" placeholder="Biology Score"><br>
+
+<button onclick="saveResult()">Save Result</button>
+
+<p id="msg"></p>
+
+<script>
+
+function saveResult(){
+
+let name = document.getElementById("studentName").value;
+let id = document.getElementById("studentID").value;
+let eng = document.getElementById("english").value;
+let math = document.getElementById("math").value;
+let bio = document.getElementById("biology").value;
+
+if(name=="" || id=="" || eng=="" || math=="" || bio==""){
+alert("Fill all fields");
+return;
+}
+
+// Save to localStorage (temporary database)
+let result = {
+name: name,
+id: id,
+english: eng,
+math: math,
+biology: bio
+};
+
+localStorage.setItem(id, JSON.stringify(result));
+
+document.getElementById("msg").innerText = "Result Saved Successfully!";
+}
+
+</script>
+
+</body>
+</html>
