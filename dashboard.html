@@ -1,23 +1,87 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Dashboard</title>
+<title>Student Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+font-family: Arial;
+background:#f5f7fa;
+text-align:center;
+}
+
+.container{
+margin-top:50px;
+}
+
+h2{
+color:#004aad;
+}
+
+.card{
+background:white;
+padding:20px;
+margin:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+display:inline-block;
+}
+
+button{
+padding:10px 20px;
+font-size:16px;
+margin-top:20px;
+cursor:pointer;
+background:#004aad;
+color:white;
+border:none;
+border-radius:5px;
+}
+</style>
+
 </head>
 
-<body style="text-align:center; font-family:Arial;">
+<body>
+
+<div class="container">
 
 <h2>Student Dashboard</h2>
 
+<div class="card">
+<p id="welcome"></p>
 <p id="score"></p>
+<p id="performance"></p>
+</div>
+
+<a href="quiz.html"><button>Take Quiz Again</button></a>
+
+</div>
 
 <script>
+
+let name = localStorage.getItem("studentName");
 let score = localStorage.getItem("score");
 
-if(score){
-document.getElementById("score").innerText = "Your Last Score: " + score;
+if(name){
+document.getElementById("welcome").innerText = "Welcome, " + name;
+}else{
+document.getElementById("welcome").innerText = "Welcome Student";
+}
+
+if(score !== null){
+document.getElementById("score").innerText = "Your Score: " + score + "/3";
+
+if(score >= 2){
+document.getElementById("performance").innerText = "Performance: Good";
+}else{
+document.getElementById("performance").innerText = "Performance: Needs Improvement";
+}
+
 }else{
 document.getElementById("score").innerText = "No score yet. Take a quiz!";
 }
+
 </script>
 
 </body>
