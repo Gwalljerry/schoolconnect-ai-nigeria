@@ -8,53 +8,87 @@
 
 <h2>Select Language / Zaɓi Harshe</h2>
 
-<button onclick="setLang('eng')">English</button>
-<button onclick="setLang('hausa')">Hausa</button>
+<button onclick="startQuiz('eng')">English</button>
+<button onclick="startQuiz('hausa')">Hausa</button>
 
 <div id="quizArea"></div>
 
 <script>
 
 let lang = "eng";
+let current = 0;
+let score = 0;
 
-function setLang(selected){
-lang = selected;
+let questions = [
+{
+engQ: "What is 2 + 2?",
+hausaQ: "Nawa ne 2 + 2?",
+options: ["3","4","5"],
+answer: "4",
+engExp: "2 + 2 equals 4.",
+hausaExp: "2 + 2 dai dai 4 ne."
+},
+{
+engQ: "Synonym of Happy?",
+hausaQ: "Ma'anar Happy?",
+options: ["Sad","Joyful","Angry"],
+answer: "Joyful",
+engExp: "Happy means joyful or glad.",
+hausaExp: "Happy yana nufin farin ciki."
+}
+];
+
+function startQuiz(selectedLang){
+lang = selectedLang;
+current = 0;
+score = 0;
 loadQuestion();
 }
 
 function loadQuestion(){
-let question = "";
-let correct = 4;
+let q = questions[current];
 
-if(lang === "eng"){
-question = "What is 2 + 2?";
-}else{
-question = "Nawa ne 2 + 2?";
-}
+let questionText = (lang === "eng") ? q.engQ : q.hausaQ;
 
-let html = `
-<h3 style="font-size:24px;">${question}</h3>
-<button onclick="check(4)">4</button>
-<button onclick="check(5)">5</button>
-`;
+let html = `<h3 style="font-size:24px;">${questionText}</h3>`;
+
+q.options.forEach(opt=>{
+html += `<button onclick="checkAnswer('${opt}')">${opt}</button><br><br>`;
+});
 
 document.getElementById("quizArea").innerHTML = html;
 }
 
-function check(ans){
-let message = "";
+function checkAnswer(selected){
+let q = questions[current];
 
-if(ans === 4){
-localStorage.setItem("score", 1);
-message = (lang === "eng") ? "Correct!" : "Dai dai ne!";
-}else{
-localStorage.setItem("score", 0);
-message = (lang === "eng") ? "Wrong!" : "Ba dai ba!";
+let correct = q.answer;
+let explanation = (lang === "eng") ? q.engExp : q.hausaExp;
+
+if(selected === correct){
+score++;
 }
 
 document.getElementById("quizArea").innerHTML =
-`<h3>${message}</h3><br>
+`<h3>${selected === correct ? "Correct!" : "Wrong!"}</h3>
+<p>${explanation}</p>
+<br>
+<button onclick="nextQuestion()">Next</button>`;
+}
+
+function nextQuestion(){
+current++;
+
+if(current < questions.length){
+loadQuestion();
+}else{
+localStorage.setItem("score", score);
+
+document.getElementById("quizArea").innerHTML =
+`<h3>Final Score: ${score}/${questions.length}</h3>
+<br>
 <a href="dashboard.html"><button>Go to Dashboard</button></a>`;
+}
 }
 
 </script>
