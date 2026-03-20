@@ -4,14 +4,14 @@
 <title>Teacher Result Upload</title>
 <style>
 body{font-family:Arial; text-align:center;}
-input{padding:8px; margin:5px;}
-table{margin:auto;}
+input, select{padding:8px; margin:5px;}
 </style>
 </head>
 
 <body>
 
 <h2>Upload Student Result</h2>
+
 <h3>Select Class</h3>
 <select id="classSelect" onchange="loadStudents()">
 <option value="">Select Class</option>
@@ -21,109 +21,61 @@ table{margin:auto;}
 <option value="SS2">SS2</option>
 </select>
 
-<br><br>
+<br>
 
 <select id="studentSelect">
 <option>Select Student</option>
 </select>
+
+<br><br>
+
 <input type="text" id="school" placeholder="School Name"><br>
-  <input type="text" id="logo" placeholder="Paste School Logo URL"><br>
-<input type="text" id="student" placeholder="Student Full Name"><br>
-<input type="text" id="class" placeholder="Class (JSS1, SS2 etc)"><br>
+<input type="text" id="logo" placeholder="School Logo URL"><br>
 <input type="text" id="term" placeholder="Term (1st, 2nd, 3rd)"><br>
+
 <h3>English</h3>
-<input type="number" id="eng1" placeholder="1st CA">
-<input type="number" id="eng2" placeholder="2nd CA">
+<input type="number" id="eng1" placeholder="CA1">
+<input type="number" id="eng2" placeholder="CA2">
 <input type="number" id="engexam" placeholder="Exam"><br>
 
-<let students = {
+<h3>Mathematics</h3>
+<input type="number" id="math1" placeholder="CA1">
+<input type="number" id="math2" placeholder="CA2">
+<input type="number" id="mathexam" placeholder="Exam"><br>
+
+<button onclick="save()">Save Result</button>
+
+<p id="msg"></p>
+
+<script>
+
+// STUDENTS
+let students = {
 JS1: ["Amina Musa","John Bala","Grace Luka"],
 JS2: ["Peter Dan","Mary Audu"],
 SS1: ["Daniel James","Ruth Paul"],
 SS2: ["Samuel John","Blessing David"]
-};>
+};
 
-function checkResult(){
+// LOAD STUDENTS
+function loadStudents(){
+let cls = document.getElementById("classSelect").value;
+let list = students[cls] || [];
 
-let name = document.getElementById("studentName").value;
+let dropdown = document.getElementById("studentSelect");
+dropdown.innerHTML = "";
 
-let data = localStorage.getItem(name);
-
-if(!data){
-alert("No result found");
-return;
+list.forEach(function(name){
+let option = document.createElement("option");
+option.text = name;
+dropdown.add(option);
+});
 }
 
-let r = JSON.parse(data);
-
-// CALCULATIONS
-let total = r.english.total + r.math.total;
-let average = total / 2;
-
-let remark = average >= 70 ? "Excellent" :
-average >= 60 ? "Good" :
-average >= 50 ? "Fair" : "Fail";
-
-let html = `
-<div style="border:2px solid black; padding:20px; width:80%; margin:auto; background:white;">
-
-<img src="${r.logo}" width="80"><br>
-
-<h2>${r.school}</h2>
-<h3>Student Report Card</h3>
-
-<p><b>Name:</b> ${r.student}</p>
-<p><b>Class:</b> ${r.class}</p>
-<p><b>Term:</b> ${r.term}</p>
-
-<table border="1" style="width:100%; text-align:center;">
-<tr>
-<th>Subject</th><th>CA1</th><th>CA2</th><th>Exam</th><th>Total</th><th>Grade</th>
-</tr>
-
-<tr>
-<td>English</td>
-<td>${r.english.ca1}</td>
-<td>${r.english.ca2}</td>
-<td>${r.english.exam}</td>
-<td>${r.english.total}</td>
-<td>${r.english.grade}</td>
-</tr>
-
-<tr>
-<td>Mathematics</td>
-<td>${r.math.ca1}</td>
-<td>${r.math.ca2}</td>
-<td>${r.math.exam}</td>
-<td>${r.math.total}</td>
-<td>${r.math.grade}</td>
-</tr>
-
-</table>
-
-<br>
-
-<h3>Total: ${total}</h3>
-<h3>Average: ${average.toFixed(2)}</h3>
-<h3>Remark: ${remark}</h3>
-
-<br>
-<button onclick="window.print()">Print Result</button>
-
-</div>
-`;
-
-document.getElementById("resultArea").innerHTML = html;
-
-}
-</script>
-localStorage.setItem(data.student, JSON.stringify(data));
-
-alert("Saved!");
-}
-
+// CALCULATE
 function calc(a,b,c){
-let total = Number(document.getElementById(a).value) +
+let total =
+Number(document.getElementById(a).value) +
 Number(document.getElementById(b).value) +
 Number(document.getElementById(c).value);
 
@@ -134,11 +86,44 @@ exam: document.getElementById(c).value,
 total: total,
 grade: total >= 70 ? "A" : total >=60 ? "B" : total >=50 ? "C" : "F"
 };
-}english: calc("eng1","eng2","engexam"),
-math: calc("math1","math2","mathexam"),
-biology: calc("bio1","bio2","bioexam"),
-chemistry: calc("chem1","chem2","chemexam"),
-physics: calc("phy1","phy2","phyexam")
+}
+
+// SAVE RESULT
+function save(){
+
+let student = document.getElementById("studentSelect").value;
+
+if(student === "Select Student"){
+alert("Select student");
+return;
+}
+
+let data = {
+school: document.getElementById("school").value,
+logo: document.getElementById("logo").value,
+student: student,
+class: document.getElementById("classSelect").value,
+term: document.getElementById("term").value,
+
+english: calc("eng1","eng2","engexam"),
+math: calc("math1","math2","mathexam")
+};
+
+// TOTAL
+let total = data.english.total + data.math.total;
+data.total = total;
+
+// SAVE SINGLE
+localStorage.setItem(student, JSON.stringify(data));
+
+// SAVE ALL (for position)
+let all = JSON.parse(localStorage.getItem("allResults")) || [];
+all.push(data);
+localStorage.setItem("allResults", JSON.stringify(all));
+
+document.getElementById("msg").innerText = "Saved Successfully!";
+}
+
 </script>
 
 </body>
