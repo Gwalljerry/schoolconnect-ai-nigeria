@@ -60,9 +60,20 @@ let html = `
 
 <br>
 
-<h3>Total: ${total}</h3>
-<h3>Average: ${average.toFixed(2)}</h3>
-<h3>Remark: ${remark}</h3>
+let total =
+r.english.total +
+r.math.total +
+r.biology.total +
+r.chemistry.total +
+r.physics.total;
+
+let subjects = 5;
+
+let average = total / subjects;
+
+let remark = average >= 75 ? "Excellent" :
+average >= 65 ? "Very Good" :
+average >= 50 ? "Good" : "Fail";
 
 <br>
 <button onclick="window.print()">Print Result</button>
