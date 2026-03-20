@@ -12,7 +12,20 @@ table{margin:auto;}
 <body>
 
 <h2>Upload Student Result</h2>
+<h3>Select Class</h3>
+<select id="classSelect" onchange="loadStudents()">
+<option value="">Select Class</option>
+<option value="JS1">JS1</option>
+<option value="JS2">JS2</option>
+<option value="SS1">SS1</option>
+<option value="SS2">SS2</option>
+</select>
 
+<br><br>
+
+<select id="studentSelect">
+<option>Select Student</option>
+</select>
 <input type="text" id="school" placeholder="School Name"><br>
   <input type="text" id="logo" placeholder="Paste School Logo URL"><br>
 <input type="text" id="student" placeholder="Student Full Name"><br>
@@ -23,7 +36,12 @@ table{margin:auto;}
 <input type="number" id="eng2" placeholder="2nd CA">
 <input type="number" id="engexam" placeholder="Exam"><br>
 
-<script>
+<let students = {
+JS1: ["Amina Musa","John Bala","Grace Luka"],
+JS2: ["Peter Dan","Mary Audu"],
+SS1: ["Daniel James","Ruth Paul"],
+SS2: ["Samuel John","Blessing David"]
+};>
 
 function checkResult(){
 
