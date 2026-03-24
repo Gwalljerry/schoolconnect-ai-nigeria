@@ -330,3 +330,26 @@ ul li {
     padding: 1.2rem 1rem;
   }
 }
+/* Small logo in navbar */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  margin-right: 0.8rem;
+}
+
+.nav-logo img {
+  height: 32px;      /* small but clear */
+  width: auto;
+  border-radius: 4px;
+}
+
+/* On very small screens, hide or shrink logo */
+@media (max-width: 500px) {
+  .nav-logo {
+    margin-right: 0.4rem;
+  }
+
+  .nav-logo img {
+    height: 26px;
+  }
+}
