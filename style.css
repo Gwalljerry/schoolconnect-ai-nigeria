@@ -268,3 +268,65 @@ ul li {
     padding: 1rem;
   }
 }
+/* Main quick access portals */
+.main-portals {
+  text-align: center;
+  margin: 2.5rem 0;
+}
+
+.main-portals h2 {
+  color: #003366;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.portal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.portal-card {
+  display: block;
+  background-color: white;
+  padding: 1.5rem 1.2rem;
+  border-radius: 6px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  border: 1px solid #e0e0e0;
+  text-align: center;
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+
+.portal-card:hover {
+  box-shadow: 0 6px 16px rgba(0,0,0,0.14);
+  transform: translateY(-3px);
+}
+
+.portal-card .icon {
+  font-size: 2rem;
+  margin-bottom: 0.4rem;
+}
+
+.portal-card h3 {
+  color: #003366;
+  margin-bottom: 0.4rem;
+  font-size: 1.1rem;
+}
+
+.portal-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* On small screens, stack cards */
+@media (max-width: 500px) {
+  .portal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .portal-card {
+    padding: 1.2rem 1rem;
+  }
+}
