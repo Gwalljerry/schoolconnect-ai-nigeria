@@ -24,6 +24,7 @@ header {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+/* Main navbar */
 nav {
   max-width: 1200px;
   margin: 0 auto;
@@ -52,6 +53,52 @@ nav a {
 
 nav a:hover {
   opacity: 0.8;
+}
+
+/* Hamburger button */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 28px;
+  height: 3px;
+  background-color: white;
+  border-radius: 3px;
+  transition: 0.3s;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hamburger {
+    display: flex;
+    padding: 0.5rem 1rem;
+    order: 1;
+  }
+
+  nav ul {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  nav ul.active {
+    display: flex;
+  }
+
+  nav a {
+    padding: 0.75rem 1rem;
+  }
 }
 
 main {
