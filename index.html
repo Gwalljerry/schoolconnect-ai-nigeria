@@ -3,76 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SchoolConnect AI Lite - Nigerian School Management</title>
+    <title>SchoolConnect AI Lite - Full School Portal</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script> <!-- Excel support -->
 </head>
 <body>
     <header>
         <h1>🎓 SchoolConnect AI Lite</h1>
-        <p>Offline School Management System for Nigerian Boarding Schools</p>
+        <p>AI-Powered Offline School Management for Nigeria</p>
     </header>
 
+    <!-- News & AI Section (Always visible) -->
+    <section id="engagement" class="engagement">
+        <div class="news">
+            <h3>📰 School News</h3>
+            <ul id="news-list">
+                <li>Term 2 Exams start next week! Prepare well.</li>
+                <li>Parents meeting on March 30th.</li>
+                <li>President Trump visits Abuja schools initiative.</li>
+            </ul>
+        </div>
+        <div class="ai-chat">
+            <h3>🤖 AI Assistant</h3>
+            <input type="text" id="ai-input" placeholder="Ask about results or tips...">
+            <button id="ai-send">Send</button>
+            <div id="ai-response"></div>
+        </div>
+    </section>
+
     <main>
-        <!-- Login Screen -->
+        <!-- Login -->
         <section id="login-screen" class="mode active">
-            <h2>Teacher Login</h2>
-            <input type="password" id="teacher-password" placeholder="Enter password">
+            <h2>Login to Portal</h2>
+            <select id="user-role">
+                <option value="teacher">Teacher</option>
+                <option value="admin">School Admin</option>
+            </select>
+            <input type="password" id="user-password" placeholder="Password">
             <button id="login-btn">Login</button>
+        </section>
+
+        <!-- Admin Dashboard -->
+        <section id="admin-dashboard" class="mode hidden">
+            <h2>Admin: Manage Students & Teachers</h2>
+            <input type="file" id="excel-upload" accept=".xlsx,.xls" />
+            <button id="process-excel">Upload Student List</button>
+            <div id="admin-actions">
+                <div class="input-group">
+                    <label>New Class:</label>
+                    <input type="text" id="new-class" placeholder="e.g., SS1A">
+                    <input type="text" id="assign-teacher" placeholder="Teacher Name">
+                    <button id="create-class">Create & Assign</button>
+                </div>
+            </div>
+            <button id="logout">Logout</button>
         </section>
 
         <!-- Teacher Dashboard -->
         <section id="teacher-dashboard" class="mode hidden">
-            <h2>Upload Results</h2>
+            <h2 id="teacher-class">Your Assigned Class</h2>
             <form id="score-form">
                 <div class="input-group">
-                    <label>Student Name:</label>
-                    <input type="text" id="student-name" required>
+                    <label>Select Student:</label>
+                    <select id="student-select"></select>
                 </div>
-                <div class="input-group">
-                    <label>Exam Number (10 digits):</label>
-                    <input type="text" id="exam-number" pattern="[0-9]{10}" maxlength="10" required>
-                </div>
-                <div class="input-group">
-                    <label>Subject:</label>
-                    <select id="subject">
-                        <option>English</option>
-                        <option>Math</option>
-                        <option>Biology</option>
-                        <option>Physics</option>
-                        <option>Chemistry</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label>CA1 (30):</label>
-                    <input type="number" id="ca1" min="0" max="30">
-                </div>
-                <div class="input-group">
-                    <label>CA2 (30):</label>
-                    <input type="number" id="ca2" min="0" max="30">
-                </div>
-                <div class="input-group">
-                    <label>Exam (40):</label>
-                    <input type="number" id="exam" min="0" max="40">
-                </div>
-                <button type="submit">Upload Result</button>
+                <!-- Subject inputs dynamic -->
+                <div id="subjects-inputs"></div>
+                <button type="submit">Upload Results</button>
             </form>
-            <button id="print-all">🖨️ Print All Report Cards</button>
+            <button id="print-all">🖨️ Print Class Report</button>
             <button id="logout">Logout</button>
         </section>
 
-        <!-- Parent Check Screen -->
+        <!-- Parent Check -->
         <section id="parent-screen" class="mode">
-            <h2>Parent Result Checker</h2>
-            <input type="text" id="parent-exam-number" placeholder="Enter 10-digit Exam Number" pattern="[0-9]{10}">
-            <button id="check-result">Check Result</button>
+            <h2>Parent/Student Portal</h2>
+            <input type="text" id="parent-exam-number" placeholder="10-digit Exam Number">
+            <button id="check-result">Check Results</button>
             <div id="parent-result"></div>
-        </section>
-
-        <!-- Results List (Teacher) -->
-        <section id="results-list" class="hidden">
-            <h2>Saved Results</h2>
-            <div id="results-display"></div>
         </section>
     </main>
 
