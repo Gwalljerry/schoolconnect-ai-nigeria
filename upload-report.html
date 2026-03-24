@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload Report Card | SchoolConnect AI Nigeria</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">SchoolConnect AI Nigeria</div>
+
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="portal.html">Student Portal</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h1>Upload Report Card (Teacher)</h1>
+      <p>Use this form to upload or record student report cards for selected classes.</p>
+
+      <form id="upload-form">
+        <p>
+          <label for="class">Class</label><br />
+          <select id="class" name="class" required>
+            <option value="">Select class</option>
+            <option value="SS1A">SS1A</option>
+            <option value="SS1B">SS1B</option>
+            <option value="SS2A">SS2A</option>
+            <option value="SS2B">SS2B</option>
+            <option value="SS3A">SS3A</option>
+          </select>
+        </p>
+        <p>
+          <label for="term">Term</label><br />
+          <select id="term" name="term" required>
+            <option value="1st">1st Term</option>
+            <option value="2nd">2nd Term</option>
+            <option value="3rd">3rd Term</option>
+          </select>
+        </p>
+        <p>
+          <label for="file">Upload Report Card (CSV or PDF)</label><br />
+          <input type="file" id="file" name="file" />
+        </p>
+        <button type="submit" class="btn">Upload Report</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 SchoolConnect AI Nigeria. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("upload-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const file = document.getElementById("file").files[0];
+      if (file) {
+        alert("Report card uploaded successfully: " + file.name);
+      } else {
+        alert("Please select a file to upload.");
+      }
+    });
+  </script>
+</body>
+</html>
