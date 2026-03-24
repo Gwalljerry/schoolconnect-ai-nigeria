@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parent Login | SchoolConnect AI Nigeria</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">SchoolConnect AI Nigeria</div>
+
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="portal.html">Student Portal</a></li>
+        <li><a href="teacher-portal.html">Teacher Portal</a></li>
+        <li><a href="parent-login.html">Parent Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h1>Parent Login</h1>
+      <p>Enter your parent / guardian credentials to view your child’s report card and school records.</p>
+
+      <form id="parent-login-form">
+        <p>
+          <label for="parent-email">Email</label><br />
+          <input type="email" id="parent-email" name="parentEmail" required />
+        </p>
+        <p>
+          <label for="password">Password</label><br />
+          <input type="password" id="password" name="password" required />
+        </p>
+        <p>
+          <label for="child-name">Child’s Name</label><br />
+          <input type="text" id="child-name" name="childName" required />
+        </p>
+        <button type="submit" class="btn">Login</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 SchoolConnect AI Nigeria. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("parent-login-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("parent-email").value.trim();
+      const pw = document.getElementById("password").value.trim();
+      const child = document.getElementById("child-name").value.trim();
+      if (email && pw && child) {
+        alert("Login successful! Redirecting to your child’s report card...");
+        window.location.href = "check-report.html";  // show child’s report
+      } else {
+        alert("Please fill in all fields.");
+      }
+    });
+  </script>
+</body>
+</html>
