@@ -1,37 +1,91 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; color: #333; }
-header { text-align: center; color: white; margin-bottom: 20px; }
-header h1 { font-size: 2.5em; }
-header p { font-size: 1.2em; opacity: 0.9; }
+/* style.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-.engagement { display: flex; gap: 20px; max-width: 900px; margin: 0 auto 30px; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-.news, .ai-chat { flex: 1; }
-.news h3, .ai-chat h3 { margin-bottom: 15px; color: #4CAF50; }
-.news ul { list-style: none; }
-.news li { margin: 10px 0; padding: 12px; background: #f0f8ff; border-radius: 8px; border-left: 4px solid #2196F3; }
-#ai-input { width: 70%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; }
-#ai-send { width: 25%; padding: 12px; background: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer; }
-#ai-response { margin-top: 15px; padding: 15px; background: #e3f2fd; border-radius: 8px; min-height: 60px; }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #222;
+  background-color: #f8f9fa;
+}
 
-main { max-width: 900px; margin: 0 auto; }
-.mode { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); margin-bottom: 20px; }
-.hidden, .mode.hidden { display: none !important; }
-.active { display: block; }
-.input-group { margin-bottom: 25px; }
-label { display: block; margin-bottom: 8px; font-weight: bold; color: #555; }
-input, select { width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 12px; font-size: 16px; }
-button { background: #4CAF50; color: white; padding: 15px 30px; border: none; border-radius: 12px; font-size: 16px; cursor: pointer; margin: 10px 5px 0 0; transition: all 0.3s; }
-button:hover { background: #45a049; transform: translateY(-2px); }
-#logout { background: #f44336; }
-#logout:hover { background: #da190b; }
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
-#subjects-inputs .input-group { display: inline-block; width: 30%; margin: 10px 1.5%; vertical-align: top; }
-.result-card { background: #f9f9f9; padding: 20px; border-radius: 12px; border-left: 5px solid #4CAF50; margin: 15px 0; }
-@media print { body { background: white; } .mode:not(#teacher-dashboard):not(#admin-dashboard) { display: none; } }
-@media (max-width: 768px) { .engagement { flex-direction: column; } #subjects-inputs .input-group { width: 100%; } header h1 { font-size: 2em; } }
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+header {
+  background-color: #003366;
+  color: white;
+  padding: 1rem 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); color: #333; min-height: 100vh; }
+nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
 
-.top-nav { position: fixed; top: 0; left: 0
+nav .logo {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+nav a {
+  color: white;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+nav a:hover {
+  opacity: 0.8;
+}
+
+main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+section {
+  margin-bottom: 3rem;
+}
+
+h1, h2, h3 {
+  color: #003366;
+}
+
+.btn {
+  display: inline-block;
+  background-color: #007cba;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.btn:hover {
+  background-color: #005a8a;
+}
+
+footer {
+  background-color: #003366;
+  color: white;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  margin-top: 3rem;
+}
