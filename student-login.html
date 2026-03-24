@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Login | SchoolConnect AI Nigeria</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">SchoolConnect AI Nigeria</div>
+
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="portal.html">Student Portal</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h1>Student Login</h1>
+      <p>Enter your student details to access your report card and school records.</p>
+
+      <form id="login-form">
+        <p>
+          <label for="student-id">Student ID</label><br />
+          <input type="text" id="student-id" name="studentId" required />
+        </p>
+        <p>
+          <label for="password">Password</label><br />
+          <input type="password" id="password" name="password" required />
+        </p>
+        <button type="submit" class="btn">Login</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 SchoolConnect AI Nigeria. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("login-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const id = document.getElementById("student-id").value.trim();
+      const pw = document.getElementById("password").value.trim();
+      if (id && pw) {
+        alert("Login successful! Redirecting to your dashboard...");
+        // In real app you'd redirect to a dashboard page
+      } else {
+        alert("Please fill in both fields.");
+      }
+    });
+  </script>
+</body>
+</html>
