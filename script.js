@@ -6,6 +6,9 @@ let students = [];
 let classes = {};
 let results = [];
 
+// Storage functions
+function encrypt(data)
+
 function encrypt(data) { return CryptoJS.AES.encrypt(JSON.stringify(data), ENCRYPT_KEY).toString(); }
 function decrypt(encrypted) { try { return JSON.parse(CryptoJS.AES.decrypt(encrypted, ENCRYPT_KEY).toString(CryptoJS.enc.Utf8)); } catch { return null; } }
 function loadData(key) { const enc = localStorage.getItem(key); return enc ? decrypt(enc) || [] : []; }
