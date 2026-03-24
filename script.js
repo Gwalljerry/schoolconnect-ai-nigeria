@@ -1,12 +1,15 @@
 // script.js
 document.addEventListener("DOMContentLoaded", () => {
-  // Mobile navbar toggle (just a small demo)
-  const toggleNav = () => {
-    const nav = document.querySelector("nav");
-    nav.style.display = nav.style.display === "block" ? "flex" : "block";
-  };
+  const hamburger = document.querySelector(".hamburger");
+  const navList = document.querySelector("nav ul");
 
-  // Contact form submit (prevent default + show alert)
+  if (hamburger && navList) {
+    hamburger.addEventListener("click", () => {
+      navList.classList.toggle("active");
+    });
+  }
+
+  // Contact form (same as before)
   const form = document.querySelector("form");
   if (form) {
     form.addEventListener("submit", (e) => {
