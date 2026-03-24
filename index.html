@@ -3,144 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SchoolConnect AI Pro - Nigerian School Portal</title>
+    <title>SchoolConnect AI Pro</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
-    <!-- Top Navigation -->
-    <nav id="top-nav" class="hidden">
-        <div class="nav-brand">
-            <i class="fas fa-graduation-cap"></i>
-            <span>SchoolConnect AI Pro</span>
-        </div>
-        <div class="nav-menu" id="nav-menu">
-            <a href="#" data-page="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-            <a href="#" data-page="results"><i class="fas fa-chart-line"></i> Results</a>
-            <a href="#" data-page="students"><i class="fas fa-users"></i> Students</a>
-            <a href="#" data-page="news"><i class="fas fa-newspaper"></i> News/AI</a>
-            <a href="#" id="logout-nav"><i class="fas fa-sign-out-alt"></i> Logout</a>
-        </div>
-        <div class="nav-toggle"><i class="fas fa-bars"></i></div>
-    </nav>
-
-    <header class="hero">
-        <div class="hero-content">
-            <h1><i class="fas fa-school"></i> SchoolConnect AI Pro</h1>
-            <p>Complete Offline Management System for Nigerian Schools</p>
-        </div>
+    <header>
+        <h1>🎓 SchoolConnect AI Pro</h1>
+        <p>Nigerian School Management System</p>
     </header>
 
-    <!-- Engagement Sidebar -->
-    <aside id="sidebar" class="hidden">
-        <div class="news-section">
-            <h3><i class="fas fa-newspaper"></i> Latest News</h3>
-            <ul id="news-list"></ul>
+    <div class="container">
+        <!-- Login -->
+        <div id="login" class="panel active">
+            <h2>Login</h2>
+            <select id="role">
+                <option value="admin">Admin (admin2026)</option>
+                <option value="teacher">Teacher (teacher123)</option>
+            </select>
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="login()">Login</button>
         </div>
-        <div class="ai-section">
-            <h3><i class="fas fa-robot"></i> AI Chat</h3>
-            <input type="text" id="ai-input" placeholder="Type here...">
-            <button id="ai-send"><i class="fas fa-paper-plane"></i></button>
-            <div id="ai-response"></div>
+
+        <!-- Admin -->
+        <div id="admin" class="panel hidden">
+            <h2>Admin Panel</h2>
+            <input type="file" id="excelFile" accept=".xlsx">
+            <button onclick="uploadExcel()">Upload Students</button>
+            <input id="className" placeholder="Class (SS1A)">
+            <input id="teacherName" placeholder="Teacher">
+            <button onclick="createClass()">Create Class</button>
+            <button onclick="logout()">Logout</button>
         </div>
-    </aside>
 
-    <!-- Main Content -->
-    <main id="main-content">
-        <!-- Login Page -->
-        <section id="login-page" class="page active">
-            <div class="login-card">
-                <h2><i class="fas fa-sign-in-alt"></i> Login</h2>
-                <select id="user-role">
-                    <option value="teacher">👨‍🏫 Teacher</option>
-                    <option value="admin">👨‍💼 School Admin</option>
-                </select>
-                <input type="password" id="user-password" placeholder="Enter Password">
-                <button id="login-btn" class="btn-primary"><i class="fas fa-arrow-right"></i> Enter Portal</button>
-                <div class="login-help">
-                    <p><strong>Admin:</strong> admin2026</p>
-                    <p><strong>Teacher:</strong> teacher123</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Dashboard Page -->
-        <section id="dashboard-page" class="page hidden">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <i class="fas fa-users"></i>
-                    <h3 id="total-students">0</h3>
-                    <p>Total Students</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-file-alt"></i>
-                    <h3 id="total-results">0</h3>
-                    <p>Results Uploaded</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                    <h3 id="assigned-classes">0</h3>
-                    <p>Your Classes</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-trophy"></i>
-                    <h3 id="top-performer">A1</h3>
-                    <p>Best Grade</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Admin Panel -->
-        <section id="admin-panel" class="page hidden">
-            <div class="panel-card">
-                <h2><i class="fas fa-cog"></i> Admin Control</h2>
-                <div class="upload-section">
-                    <h4>📊 Upload Students Excel</h4>
-                    <input type="file" id="excel-upload" accept=".xlsx,.xls" />
-                    <button id="process-excel" class="btn-success">Process Excel</button>
-                </div>
-                <div class="create-section">
-                    <h4>📚 Create Class</h4>
-                    <div class="input-row">
-                        <input type="text" id="new-class" placeholder="Class (SS1A)">
-                        <input type="text" id="assign-teacher" placeholder="Teacher Name">
-                        <button id="create-class" class="btn-primary">Create</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Teacher Results -->
-        <section id="teacher-results" class="page hidden">
-            <div class="panel-card">
-                <h2 id="teacher-class-header">Your Assigned Class</h2>
-                <form id="score-form">
-                    <div class="form-row">
-                        <div class="input-group">
-                            <label><i class="fas fa-user"></i> Student</label>
-                            <select id="student-select"></select>
-                        </div>
-                    </div>
-                    <div id="subjects-inputs" class="subjects-grid"></div>
-                    <button type="submit" class="btn-success btn-large"><i class="fas fa-upload"></i> Upload All Results</button>
-                </form>
-                <button id="print-all" class="btn-secondary"><i class="fas fa-print"></i> Print Report Cards</button>
-            </div>
-        </section>
-
-        <!-- Parent Check -->
-        <section id="parent-check" class="page hidden">
-            <div class="panel-card">
-                <h2><i class="fas fa-search"></i> Check Results</h2>
-                <input type="text" id="parent-exam-number" placeholder="Enter 10-digit Exam Number">
-                <button id="check-result" class="btn-primary"><i class="fas fa-magnifying-glass"></i> Check</button>
-                <div id="parent-result" class="results-display"></div>
-            </div>
-        </section>
-    </main>
-
-    <script src="script.js"></script>
-</body>
-</html>
+        <!-- Teacher -->
+        <div id="teacher" class="panel hidden
