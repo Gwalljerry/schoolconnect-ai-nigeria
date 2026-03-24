@@ -1,39 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SchoolConnect AI Pro</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SchoolConnect AI Nigeria</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
-        <h1>🎓 SchoolConnect AI Pro</h1>
-        <p>Nigerian School Management System</p>
-    </header>
+  <header>
+    <nav>
+      <div class="logo">SchoolConnect AI Nigeria</div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <div class="container">
-        <!-- Login -->
-        <div id="login" class="panel active">
-            <h2>Login</h2>
-            <select id="role">
-                <option value="admin">Admin (admin2026)</option>
-                <option value="teacher">Teacher (teacher123)</option>
-            </select>
-            <input type="password" id="password" placeholder="Password">
-            <button onclick="login()">Login</button>
-        </div>
+  <main>
+    <section class="hero">
+      <h1>AI‑Powered School Connectivity for Nigeria</h1>
+      <p>
+        SchoolConnect AI Nigeria helps schools, teachers, and parents communicate,
+        manage records, and access AI‑driven learning insights in one platform.
+      </p>
+      <a href="contact.html" class="btn">Get Started</a>
+    </section>
 
-        <!-- Admin -->
-        <div id="admin" class="panel hidden">
-            <h2>Admin Panel</h2>
-            <input type="file" id="excelFile" accept=".xlsx">
-            <button onclick="uploadExcel()">Upload Students</button>
-            <input id="className" placeholder="Class (SS1A)">
-            <input id="teacherName" placeholder="Teacher">
-            <button onclick="createClass()">Create Class</button>
-            <button onclick="logout()">Logout</button>
-        </div>
+    <section class="features">
+      <h2>Why Choose Us?</h2>
+      <ul>
+        <li>AI‑powered dashboards for teachers and parents</li>
+        <li>Secure student information management</li>
+        <li>Real‑time communication between school and home</li>
+      </ul>
+    </section>
+  </main>
 
-        <!-- Teacher -->
-        <div id="teacher" class="panel hidden
+  <footer>
+    <p>&copy; 2026 SchoolConnect AI Nigeria. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
