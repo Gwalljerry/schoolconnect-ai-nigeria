@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teacher Login | SchoolConnect AI Nigeria</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">SchoolConnect AI Nigeria</div>
+
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="portal.html">Student Portal</a></li>
+        <li><a href="teacher-portal.html">Teacher Portal</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h1>Teacher Login</h1>
+      <p>Enter your teacher credentials to access your dashboard and manage your classes.</p>
+
+      <form id="teacher-login-form">
+        <p>
+          <label for="staff-id">Staff ID</label><br />
+          <input type="text" id="staff-id" name="staffId" required />
+        </p>
+        <p>
+          <label for="password">Password</label><br />
+          <input type="password" id="password" name="password" required />
+        </p>
+        <button type="submit" class="btn">Login</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 SchoolConnect AI Nigeria. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("teacher-login-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const id = document.getElementById("staff-id").value.trim();
+      const pw = document.getElementById("password").value.trim();
+      if (id && pw) {
+        alert("Login successful! Redirecting to your dashboard...");
+        // In real app: window.location.href = "teacher-dashboard.html";
+      } else {
+        alert("Please fill in both fields.");
+      }
+    });
+  </script>
+</body>
+</html>
