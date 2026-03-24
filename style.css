@@ -224,3 +224,47 @@ section.hero p {
 ul li {
   margin-bottom: 0.6rem;
 }
+/* Services cards */
+.services-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+}
+
+.card {
+  background-color: white;
+  padding: 1.2rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border: 1px solid #e0e0e0;
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+}
+
+.card h3 {
+  color: #003366;
+  margin-bottom: 0.6rem;
+  font-size: 1.1rem;
+}
+
+.card p {
+  margin-bottom: 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* Make cards fill width on very small screens */
+@media (max-width: 480px) {
+  .services-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+}
