@@ -3,54 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SchoolConnect AI Lite</title>
+    <title>SchoolConnect AI Lite - Nigerian School Management</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 <body>
     <header>
         <h1>🎓 SchoolConnect AI Lite</h1>
-        <p>Offline Smart School System for Nigerian Schools</p>
+        <p>Offline School Management System for Nigerian Boarding Schools</p>
     </header>
 
     <main>
-        <!-- Teacher Mode -->
-        <section id="teacher-mode" class="mode active">
-            <h2>Teacher Mode: Enter Scores</h2>
+        <!-- Login Screen -->
+        <section id="login-screen" class="mode active">
+            <h2>Teacher Login</h2>
+            <input type="password" id="teacher-password" placeholder="Enter password">
+            <button id="login-btn">Login</button>
+        </section>
+
+        <!-- Teacher Dashboard -->
+        <section id="teacher-dashboard" class="mode hidden">
+            <h2>Upload Results</h2>
             <form id="score-form">
                 <div class="input-group">
                     <label>Student Name:</label>
                     <input type="text" id="student-name" required>
                 </div>
                 <div class="input-group">
-                    <label>CA1 (out of 30):</label>
-                    <input type="number" id="ca1" min="0" max="30" required>
+                    <label>Exam Number (10 digits):</label>
+                    <input type="text" id="exam-number" pattern="[0-9]{10}" maxlength="10" required>
                 </div>
                 <div class="input-group">
-                    <label>CA2 (out of 30):</label>
-                    <input type="number" id="ca2" min="0" max="30" required>
+                    <label>Subject:</label>
+                    <select id="subject">
+                        <option>English</option>
+                        <option>Math</option>
+                        <option>Biology</option>
+                        <option>Physics</option>
+                        <option>Chemistry</option>
+                    </select>
                 </div>
                 <div class="input-group">
-                    <label>Exam (out of 40):</label>
-                    <input type="number" id="exam" min="0" max="40" required>
+                    <label>CA1 (30):</label>
+                    <input type="number" id="ca1" min="0" max="30">
                 </div>
-                <button type="submit">Calculate Results</button>
+                <div class="input-group">
+                    <label>CA2 (30):</label>
+                    <input type="number" id="ca2" min="0" max="30">
+                </div>
+                <div class="input-group">
+                    <label>Exam (40):</label>
+                    <input type="number" id="exam" min="0" max="40">
+                </div>
+                <button type="submit">Upload Result</button>
             </form>
-            <button id="voice-feedback">🔊 Voice Feedback</button>
-            <button id="save-result">💾 Save Offline</button>
+            <button id="print-all">🖨️ Print All Report Cards</button>
+            <button id="logout">Logout</button>
         </section>
 
-        <!-- Result Display -->
-        <section id="result-display" class="result-box hidden">
-            <h2>Results</h2>
-            <div id="result-content"></div>
-            <button id="student-preview">Student View</button>
-            <button id="new-calc">New Calculation</button>
+        <!-- Parent Check Screen -->
+        <section id="parent-screen" class="mode">
+            <h2>Parent Result Checker</h2>
+            <input type="text" id="parent-exam-number" placeholder="Enter 10-digit Exam Number" pattern="[0-9]{10}">
+            <button id="check-result">Check Result</button>
+            <div id="parent-result"></div>
         </section>
 
-        <!-- Student Preview Mode -->
-        <section id="student-mode" class="mode hidden">
-            <h2>Student Result Preview</h2>
-            <div id="student-result"></div>
+        <!-- Results List (Teacher) -->
+        <section id="results-list" class="hidden">
+            <h2>Saved Results</h2>
+            <div id="results-display"></div>
         </section>
     </main>
 
