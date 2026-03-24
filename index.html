@@ -1,61 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>SchoolConnect AI Nigeria</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<style>
-body{
-margin:0;
-font-family:Arial;
-background:#f5f7fa;
-text-align:center;
-}
-
-header{
-background:#004aad;
-color:white;
-padding:20px;
-}
-
-button{
-padding:12px 25px;
-margin:10px;
-border:none;
-background:#004aad;
-color:white;
-font-size:16px;
-border-radius:5px;
-cursor:pointer;
-}
-
-button:hover{
-background:#002f6c;
-}
-
-.container{
-margin-top:40px;
-}
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SchoolConnect AI Lite</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+    <header>
+        <h1>🎓 SchoolConnect AI Lite</h1>
+        <p>Offline Smart School System for Nigerian Schools</p>
+    </header>
 
-<header>
-<h1>SchoolConnect AI Nigeria</h1>
-<p>Smart Learning Platform for Secondary School Students</p>
-</header>
+    <main>
+        <!-- Teacher Mode -->
+        <section id="teacher-mode" class="mode active">
+            <h2>Teacher Mode: Enter Scores</h2>
+            <form id="score-form">
+                <div class="input-group">
+                    <label>Student Name:</label>
+                    <input type="text" id="student-name" required>
+                </div>
+                <div class="input-group">
+                    <label>CA1 (out of 30):</label>
+                    <input type="number" id="ca1" min="0" max="30" required>
+                </div>
+                <div class="input-group">
+                    <label>CA2 (out of 30):</label>
+                    <input type="number" id="ca2" min="0" max="30" required>
+                </div>
+                <div class="input-group">
+                    <label>Exam (out of 40):</label>
+                    <input type="number" id="exam" min="0" max="40" required>
+                </div>
+                <button type="submit">Calculate Results</button>
+            </form>
+            <button id="voice-feedback">🔊 Voice Feedback</button>
+            <button id="save-result">💾 Save Offline</button>
+        </section>
 
-<div class="container">
+        <!-- Result Display -->
+        <section id="result-display" class="result-box hidden">
+            <h2>Results</h2>
+            <div id="result-content"></div>
+            <button id="student-preview">Student View</button>
+            <button id="new-calc">New Calculation</button>
+        </section>
 
-<h2>Welcome</h2>
-<p>Practice quizzes, track performance, and improve your results.</p>
-<a href="quiz.html"><button>Start Quiz</button></a>
-<a href="login.html"><button>Student Login</button></a>
-<a href="result.html"><button>Check Result</button></a>
-<a href="teacher.html"><button>Teacher Upload</button></a>
-</div>
-<a href="admin.html"><button>Admin Panel</button></a>
+        <!-- Student Preview Mode -->
+        <section id="student-mode" class="mode hidden">
+            <h2>Student Result Preview</h2>
+            <div id="student-result"></div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
